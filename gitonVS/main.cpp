@@ -10,6 +10,7 @@ int main()
 	}
 	p = a;
 	printf("%d,%d\n", *p, *a);
+	printf("%x", p + 1);
 
 	return 0;
 
