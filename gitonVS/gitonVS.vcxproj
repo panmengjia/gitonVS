@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="1108main.cpp" />
     <ClCompile Include="1109main.cpp" />
+    <ClCompile Include="fft1109.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

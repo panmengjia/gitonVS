@@ -1,10 +1,10 @@
 #include "main.h"
 
 
-int main()
+int main(int argc, const char** argv)
 {
 
-	testarray();
+	opencvSapmleOfdft(argc, argv);
 
 	return 0;
 }
