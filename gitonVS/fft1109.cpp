@@ -1,3 +1,4 @@
+#include "main.h"
 /*
 ¥˙¬Î£∫https://blog.csdn.net/keith_bb/article/details/53389819
 */
@@ -24,7 +25,7 @@ int opencvdft()
 
     Mat padded;                 //“‘0ÃÓ≥‰ ‰»ÎÕºœÒæÿ’Û
     /*I.resize(Size(I.cols * 0.5, I.rows * 0.5));*/
-    resize(I, I, Size(I.cols*0.5,I.rows*0.5));
+    resize(I, I, Size((int)(I.cols*0.5),(int)(I.rows*0.5)));
     int m = getOptimalDFTSize(I.rows);
     int n = getOptimalDFTSize(I.cols);
     
@@ -117,7 +118,9 @@ int opencvSapmleOfdft(int argc, const char** argv)
         return 0;
     }
     string filename = parser.get<string>(0);
-    Mat img = imread(samples::findFile(filename), IMREAD_GRAYSCALE);
+    //Mat img = imread(samples::findFile(filename), IMREAD_GRAYSCALE);
+    Mat img = imread("C:\\Users\\29263\\Downloads\\image.jpeg", IMREAD_GRAYSCALE);
+    resize(img, img, Size((int)(img.cols * 0.5), (int)(img.rows * 0.47)));
     if (img.empty())
     {
         help(argv);
@@ -126,8 +129,16 @@ int opencvSapmleOfdft(int argc, const char** argv)
     }
     int M = getOptimalDFTSize(img.rows);
     int N = getOptimalDFTSize(img.cols);
+    cout << "M = " << M << " N = " << N << endl;
+    cout << "img.rows = " << img.rows << " img.cols = " << img.cols << endl;
     Mat padded;
     copyMakeBorder(img, padded, 0, M - img.rows, 0, N - img.cols, BORDER_CONSTANT, Scalar::all(0));
+    imshow("img", img);
+    namedWindow("padded", WINDOW_NORMAL);
+    resizeWindow("padded", N, M);
+    imshow("padded", padded);
+    cout << "padded.rows = " << padded.rows << " padded.cols = " << padded.cols << endl;
+
 
     Mat planes[] = { Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F) };
     Mat complexImg;
@@ -170,6 +181,5 @@ int opencvSapmleOfdft(int argc, const char** argv)
     waitKey();
     return 0;
 }
-
 
 /////opencvπŸ∑Ω‘¥¬Î
